@@ -1,0 +1,48 @@
+apply plugin: "com.jfrog.bintray"
+apply plugin: "maven-publish"
+
+def siteUrl = "https://github.com/line/clova-cek-sdk-kotlin"     // Homepage URL of the library
+def gitUrl = "https://github.com/line/clova-cek-sdk-kotlin.git"  // Git repository URL
+
+group = "com.linecorp"
+
+//create the local.properties for bintray account
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+task generateSourcesJar(type: Jar) {
+    group = "jar"
+    from sourceSets.main.allSource
+    classifier = "sources"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact generateSourcesJar
+        }
+    }
+}
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    publications = ["mavenJava"]
+    pkg {
+        repo = "clova-cek-sdk-kotlin"
+        // it is the name that appears in bintray when logged
+        name = "$group:$POM_ARTIFACT_ID"
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+        dryRun = true
+    }
+}
+
+def isSnapshot() {
+    def project = getProject()
+    return project.getVersion().contains("SNAPSHOT")
+}

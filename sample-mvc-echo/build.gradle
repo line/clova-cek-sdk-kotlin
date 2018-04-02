@@ -1,0 +1,36 @@
+/*
+ * Copyright (c) 2018 LINE Corporation. All rights Reserved.
+ * LINE Corporation PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+plugins {
+    id "war"
+    id "org.jetbrains.kotlin.plugin.spring" version "1.2.50"
+    id "org.springframework.boot" version "2.0.3.RELEASE"
+    id "io.spring.dependency-management" version "1.0.4.RELEASE"
+}
+
+group = "com.linecorp"
+version = "0.1-SNAPSHOT"
+
+dependencies {
+    implementation project(":clova-extension-core")
+    implementation project(":clova-extension-converter-jackson")
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion"
+
+    implementation "org.springframework.boot:spring-boot-starter-web:${springbootVersion}"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "io.projectreactor:reactor-test"
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs = ["-Xjsr305=strict"]
+    }
+}

@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) 2018 LINE Corporation. All rights Reserved.
+ * LINE Corporation PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+buildscript {
+    ext.kotlinVersion = "1.2.51"
+    ext.dokkaVersion = "0.9.17"
+    ext.bintrayVersion = "1.8.4"
+
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokkaVersion}"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${bintrayVersion}"
+    }
+}
+
+ext {
+    junitVersion = "5.1.1"
+    jacksonVersion = "2.9.4.1"
+    springbootVersion = "2.0.3.RELEASE"
+    kotlinxCoroutinesVersion = "0.23.4"
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "kotlin"
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+            freeCompilerArgs = ["-Xjsr305=strict"]
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    kotlin {
+        experimental {
+            coroutines "enable"
+        }
+    }
+
+    repositories {
+        jcenter()
+    }
+}

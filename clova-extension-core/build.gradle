@@ -1,0 +1,22 @@
+group = "com.linecorp"
+version = "$SDK_VERSION"
+
+//apply from: "../deploy.gradle"
+apply from: "../deploy-bintray.gradle"
+apply from: "../document-gen.gradle"
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion"
+    implementation "org.slf4j:slf4j-api:1.7.25"
+
+    testImplementation "org.mockito:mockito-core:2.18.3"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+

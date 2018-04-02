@@ -1,0 +1,14 @@
+group = "com.linecorp"
+version = "${SDK_VERSION}"
+
+//apply from: "../deploy.gradle"
+apply from: "../deploy-bintray.gradle"
+apply from: "../document-gen.gradle"
+
+dependencies {
+    implementation project(":clova-extension-core")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}

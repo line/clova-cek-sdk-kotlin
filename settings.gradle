@@ -1,0 +1,13 @@
+rootProject.name = "clova-extension-kotlin"
+
+include (
+        "clova-extension-core",
+        "clova-extension-converter-jackson",
+        "sample-webflux-echo",
+        "sample-mvc-echo"
+)
+
+findProject(":sample-webflux-echo")?.name = "sample-webflux-echo"
+findProject(":sample-mvc-echo")?.name = "sample-mvc-echo"
+findProject(":clova-extension-core")?.name = "clova-extension-core"
+findProject(":clova-extension-converter-jackson")?.name = "clova-extension-converter-jackson"

@@ -1,0 +1,53 @@
+package com.linecorp.clova.extension.model
+
+/**
+ * The json properties that clova supports
+ */
+class JsonProperties {
+    companion object {
+        const val VERSION = "version"
+        const val TYPE = "type"
+        const val NAME = "name"
+        const val SLOTS = "slots"
+        const val VALUE = "value"
+        const val VALUES = "values"
+        const val SESSION = "session"
+        const val SESSION_ID = "sessionId"
+        const val SESSION_ATTRIBUTES = "sessionAttributes"
+        const val USER = "user"
+        const val USER_ID = "userId"
+        const val ACCESS_TOKEN = "accessToken"
+        const val NEW = "new"
+        const val CONTEXT = "context"
+        const val REQUEST = "request"
+        const val APPLICATION = "application"
+        const val APPLICATION_ID = "applicationId"
+        const val DEVICE = "device"
+        const val DEVICE_ID = "deviceId"
+        const val DISPLAY = "display"
+        const val CONTENT_LAYER = "contentLayer"
+        const val WIDTH = "width"
+        const val HEIGHT = "height"
+        const val DPI = "dpi"
+        const val ORIENTATION = "orientation"
+        const val SIZE = "size"
+        const val INTENT = "intent"
+        const val RESPONSE = "response"
+        const val OUTPUT_SPEECH = "outputSpeech"
+        const val CARD = "card"
+        const val DIRECTIVES = "directives"
+        const val LANGUAGE = "lang"
+        const val SHOULD_END_SESSION = "shouldEndSession"
+        const val SYSTEM = "System"
+        const val REQUEST_ID = "requestId"
+        const val EXTENSION_ID = "extensionId"
+        const val TIMESTAMP = "timestamp"
+        const val LOCALE = "locale"
+        const val REASON = "reason"
+        const val REPROMPT = "reprompt"
+        const val AUDIO_PLAYER = "AudioPlayer"
+        const val OFFSET_INMILLI_SECONDS = "offsetInMilliseconds"
+        const val PLAYER_ACTIVITY = "playerActivity"
+        const val STREAM = "stream"
+    }
+}
