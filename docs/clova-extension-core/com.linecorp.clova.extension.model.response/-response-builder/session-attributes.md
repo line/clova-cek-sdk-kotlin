@@ -1,0 +1,5 @@
+[clova-extension-core](../../index.md) / [com.linecorp.clova.extension.model.response](../index.md) / [ResponseBuilder](index.md) / [sessionAttributes](./session-attributes.md)
+
+# sessionAttributes
+
+`var sessionAttributes: `[`Map`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`>`

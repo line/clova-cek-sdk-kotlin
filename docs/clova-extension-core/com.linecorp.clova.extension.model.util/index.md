@@ -1,0 +1,12 @@
+[clova-extension-core](../index.md) / [com.linecorp.clova.extension.model.util](./index.md)
+
+## Package com.linecorp.clova.extension.model.util
+
+### Functions
+
+| Name | Summary |
+|---|---|
+| [simpleResponse](simple-response.md) | `fun simpleResponse(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, endSession: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false): `[`ClovaExtensionResponse`](../com.linecorp.clova.extension.model.response/-clova-extension-response/index.md)<br>The helper function to create simple voice response |
+| [simpleResponseWithReprompt](simple-response-with-reprompt.md) | `fun simpleResponseWithReprompt(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, repromptMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, endSession: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false): `[`ClovaExtensionResponse`](../com.linecorp.clova.extension.model.response/-clova-extension-response/index.md)<br>The helper function to create simple voice response with the reprompt message |
+| [speechListResponse](speech-list-response.md) | `fun speechListResponse(messages: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>, endSession: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false): `[`ClovaExtensionResponse`](../com.linecorp.clova.extension.model.response/-clova-extension-response/index.md)<br>The helper function to create simple speech list response |
+| [speechListResponseWithReprompt](speech-list-response-with-reprompt.md) | `fun speechListResponseWithReprompt(messages: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>, repromptMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, endSession: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false): `[`ClovaExtensionResponse`](../com.linecorp.clova.extension.model.response/-clova-extension-response/index.md)<br>The helper function to create simple speech list response with reprompt message |

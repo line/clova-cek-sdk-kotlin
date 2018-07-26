@@ -1,0 +1,10 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+com.linecorp.clova.extension.client
+com.linecorp.clova.extension.exception
+com.linecorp.clova.extension.model
+com.linecorp.clova.extension.model.core
+com.linecorp.clova.extension.model.request
+com.linecorp.clova.extension.model.response
+com.linecorp.clova.extension.model.util
