@@ -38,7 +38,7 @@ bintray {
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
-        dryRun = true
+        dryRun = false
     }
 }
 

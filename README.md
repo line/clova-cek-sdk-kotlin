@@ -77,3 +77,6 @@ To see the tutorial, please check [tutorial](TUTORIAL.md)
 
 ## References
 - official document: https://clova-developers.line.me/guide/
+- API documents:
+    - [clova-extension-core](docs/clova-extension-core/index.md)
+    - [clova-extension-converter-jackson](docs/clova-extension-converter-jackson/index.md)
