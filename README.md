@@ -1,4 +1,5 @@
-# clova-cek-sdk-kotlin
+# clova-cek-sdk-kotlin ![](https://travis-ci.org/line/clova-cek-sdk-kotlin.svg?branch=master)
+
 This is clova extension sdk for kotlin. You can use this sdk with any server-side frameworks like Spring, Armeria, etc.
 
 This SDK contains several libraries.
