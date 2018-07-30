@@ -8,7 +8,11 @@ group = "com.linecorp"
 
 //create the local.properties for bintray account
 Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+try {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+} catch (IOException e) {
+    println("[Warngin]No local.properties found, deploy tasks can't run correctly.")
+}
 
 task generateSourcesJar(type: Jar) {
     group = "jar"
@@ -46,3 +50,4 @@ def isSnapshot() {
     def project = getProject()
     return project.getVersion().contains("SNAPSHOT")
 }
+
