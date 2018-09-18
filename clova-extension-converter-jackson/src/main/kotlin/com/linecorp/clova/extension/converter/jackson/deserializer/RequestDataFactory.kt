@@ -8,16 +8,16 @@ import com.linecorp.clova.extension.converter.jackson.validateJsonProperty
 import com.linecorp.clova.extension.exception.MissingJsonPropertyException
 import com.linecorp.clova.extension.exception.NonsupportedRequestTypeException
 import com.linecorp.clova.extension.model.JsonProperties
+import com.linecorp.clova.extension.model.audio.AudioPlayer
+import com.linecorp.clova.extension.model.audio.AudioStreamInfo
+import com.linecorp.clova.extension.model.audio.PlayerActivity
 import com.linecorp.clova.extension.model.core.Application
-import com.linecorp.clova.extension.model.core.AudioPlayer
-import com.linecorp.clova.extension.model.core.AudioStreamInfo
 import com.linecorp.clova.extension.model.core.ContentLayer
 import com.linecorp.clova.extension.model.core.Context
 import com.linecorp.clova.extension.model.core.Device
 import com.linecorp.clova.extension.model.core.Display
 import com.linecorp.clova.extension.model.core.DisplaySize
 import com.linecorp.clova.extension.model.core.Orientation
-import com.linecorp.clova.extension.model.core.PlayerActivity
 import com.linecorp.clova.extension.model.core.User
 import com.linecorp.clova.extension.model.request.CustomExtensionRequest
 import com.linecorp.clova.extension.model.request.CustomRequest
@@ -103,8 +103,12 @@ internal class RequestDataFactory(
 
     @Throws(MissingJsonPropertyException::class)
     fun toAudioStreamInfo(node: JsonNode): AudioStreamInfo {
-        //TODO: implement it later when the document has this infomation
-        return AudioStreamInfo()
+        return AudioStreamInfo(
+                token = node[JsonProperties.TOKEN].asText(),
+                url = node[JsonProperties.URL].asText(),
+                urlPlayable = node[JsonProperties.URL_PLAYABLE].asBoolean(),
+                beginAtInMilliseconds = node[JsonProperties.BEGINAT_IN_MILLISECONDS].asLong()
+        )
     }
 
     @Throws(MissingJsonPropertyException::class)

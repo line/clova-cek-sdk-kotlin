@@ -1,5 +1,6 @@
 package com.linecorp.clova.extension.converter.jackson
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -17,6 +18,7 @@ import com.linecorp.clova.extension.converter.jackson.serializer.SpeechInfoSeria
 import com.linecorp.clova.extension.converter.jackson.serializer.SpeechSerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.SystemSerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.UserSerializer
+import com.linecorp.clova.extension.converter.jackson.serializer.audio.ProgressReportSerializer
 import com.linecorp.clova.extension.exception.MissingJsonPropertyException
 import com.linecorp.clova.extension.model.request.CustomExtensionRequest
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
@@ -48,6 +50,7 @@ internal fun clovaObjectMapper(isVerifyProperties: Boolean = true): ObjectMapper
         addSerializer(ResponseBodySerializer())
         addSerializer(SpeechSerializer())
         addSerializer(SpeechInfoSerializer())
+        addSerializer(ProgressReportSerializer())
 
         addDeserializer(
                 CustomExtensionRequest::class.java, RequestDeserializer(isVerifyProperties))
@@ -55,4 +58,5 @@ internal fun clovaObjectMapper(isVerifyProperties: Boolean = true): ObjectMapper
         addDeserializer(ClovaExtensionResponse::class.java, ResponseDeserializer())
     }
     registerModule(simpleModule)
+    this.setSerializationInclusion(JsonInclude.Include.NON_NULL)
 }

@@ -49,5 +49,12 @@ class JsonProperties {
         const val OFFSET_INMILLI_SECONDS = "offsetInMilliseconds"
         const val PLAYER_ACTIVITY = "playerActivity"
         const val STREAM = "stream"
+        const val TOKEN = "token"
+        const val URL = "url"
+        const val URL_PLAYABLE = "urlPlayable"
+        const val BEGINAT_IN_MILLISECONDS = "beginAtInMilliseconds"
+        const val PROGRESS_REPORT_DELAY_IN_MILLISECONDS = "progressReportDelayInMilliseconds"
+        const val PROGRESS_REPORT_INTERVAL_IN_MILLISECONDS = "progressReportIntervalInMilliseconds"
+        const val PROGRESS_REPORT_POSITION_IN_MILLISECONDS = "progressReportPositionInMilliseconds"
     }
 }

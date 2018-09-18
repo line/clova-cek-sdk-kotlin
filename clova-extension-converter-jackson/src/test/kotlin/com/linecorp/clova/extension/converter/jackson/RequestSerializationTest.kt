@@ -1,16 +1,17 @@
 package com.linecorp.clova.extension.converter.jackson
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.linecorp.clova.extension.model.audio.AudioPlayer
+import com.linecorp.clova.extension.model.audio.AudioStreamInfo
+import com.linecorp.clova.extension.model.audio.PlayerActivity
+import com.linecorp.clova.extension.model.audio.ProgressReport
 import com.linecorp.clova.extension.model.core.Application
-import com.linecorp.clova.extension.model.core.AudioPlayer
-import com.linecorp.clova.extension.model.core.AudioStreamInfo
 import com.linecorp.clova.extension.model.core.ContentLayer
 import com.linecorp.clova.extension.model.core.Context
 import com.linecorp.clova.extension.model.core.Device
 import com.linecorp.clova.extension.model.core.Display
 import com.linecorp.clova.extension.model.core.DisplaySize
 import com.linecorp.clova.extension.model.core.Orientation
-import com.linecorp.clova.extension.model.core.PlayerActivity
 import com.linecorp.clova.extension.model.core.User
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -123,7 +124,12 @@ class RequestSerializationTest {
         val audioPlayer = AudioPlayer(
                 activity = PlayerActivity.PAUSED,
                 offsetInMilliseconds = 100,
-                stream = AudioStreamInfo(),
+                stream = AudioStreamInfo(
+                        token = "test-token",
+                        url = "http://test.com",
+                        urlPlayable = true,
+                        beginAtInMilliseconds = 1234567
+                ),
                 totalInMilliseconds = 1000
         )
 
@@ -132,8 +138,79 @@ class RequestSerializationTest {
                 "{" +
                         "\"activity\":\"PAUSED\"," +
                         "\"offsetInMilliseconds\":100," +
-                        "\"stream\":{}," +
+                        "\"stream\":{" +
+                            "\"token\":\"test-token\"," +
+                            "\"url\":\"http://test.com\"," +
+                            "\"urlPlayable\":true," +
+                            "\"beginAtInMilliseconds\":1234567" +
+                        "}," +
                         "\"totalInMilliseconds\":1000" +
+                "}" == result)
+    }
+
+    @Test
+    internal fun testProgressReport() {
+        val progressReport1 = ProgressReport(
+                positionInMilliseconds = 60000
+        )
+
+
+        val progressReport2 = ProgressReport(
+                delayInMilliseconds = 10,
+                positionInMilliseconds = 60000
+        )
+
+        val progressReport3 = ProgressReport(
+                delayInMilliseconds = 10,
+                intervalInMilliseconds = 200,
+                positionInMilliseconds = 60000
+        )
+
+        val result1 = mapper.writeValueAsString(progressReport1)
+        assertTrue(
+                "{" +
+                        "\"progressReportPositionInMilliseconds\":60000" +
+                "}" == result1)
+
+        val result2 = mapper.writeValueAsString(progressReport2)
+        assertTrue(
+                "{" +
+                        "\"progressReportDelayInMilliseconds\":10," +
+                        "\"progressReportPositionInMilliseconds\":60000" +
+                "}" == result2)
+
+        val result3 = mapper.writeValueAsString(progressReport3)
+        assertTrue(
+                "{" +
+                        "\"progressReportDelayInMilliseconds\":10," +
+                        "\"progressReportIntervalInMilliseconds\":200," +
+                        "\"progressReportPositionInMilliseconds\":60000" +
+                "}" == result3)
+    }
+
+    @Test
+    fun testAudioStreamInfo() {
+        val audioStreamInfo = AudioStreamInfo(
+                token = "test-token",
+                url = "http://test.com",
+                urlPlayable = true,
+                beginAtInMilliseconds = 1234567,
+                durationInMilliseconds = 10,
+                progressReport = ProgressReport(
+                        positionInMilliseconds = 60000
+                )
+        )
+
+        val result = mapper.writeValueAsString(audioStreamInfo)
+        assertTrue(
+                "{" +
+                        "\"token\":\"test-token\"," +
+                        "\"url\":\"http://test.com\"," +
+                        "\"urlPlayable\":true," +
+                        "\"beginAtInMilliseconds\":1234567," +
+                        "\"durationInMilliseconds\":10," +
+                        "\"progressReport\":{\"progressReportPositionInMilliseconds\":60000}" +
+
                 "}" == result)
     }
 

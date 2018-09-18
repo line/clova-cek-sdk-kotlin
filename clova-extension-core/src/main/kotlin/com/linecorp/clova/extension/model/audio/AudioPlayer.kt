@@ -3,7 +3,7 @@
  * LINE Corporation PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package com.linecorp.clova.extension.model.core
+package com.linecorp.clova.extension.model.audio
 
 enum class PlayerActivity {
     IDLE,
@@ -30,6 +30,3 @@ data class AudioPlayer(
         val stream: AudioStreamInfo? = null,
         val totalInMilliseconds: Int? = null
 )
-
-//TODO: there is no audio stream info in api document yet.
-class AudioStreamInfo
