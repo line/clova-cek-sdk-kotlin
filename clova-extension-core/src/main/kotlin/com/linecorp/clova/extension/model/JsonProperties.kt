@@ -56,5 +56,13 @@ class JsonProperties {
         const val PROGRESS_REPORT_DELAY_IN_MILLISECONDS = "progressReportDelayInMilliseconds"
         const val PROGRESS_REPORT_INTERVAL_IN_MILLISECONDS = "progressReportIntervalInMilliseconds"
         const val PROGRESS_REPORT_POSITION_IN_MILLISECONDS = "progressReportPositionInMilliseconds"
+        const val HEADER = "header"
+        const val PAYLOAD = "payload"
+        const val NAME_SPACE = "nameSpace"
+        const val MESSAGE_ID = "messageId"
+        const val DIALOG_REQUEST_ID = "dialogRequestId"
+        const val AUDIO_ITEM = "audioItem"
+        const val SOURCE = "source"
+        const val PLAY_BEHAVIOR = "playBehavior"
     }
 }

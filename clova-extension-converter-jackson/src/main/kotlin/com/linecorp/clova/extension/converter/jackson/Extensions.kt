@@ -12,6 +12,7 @@ import com.linecorp.clova.extension.converter.jackson.serializer.ClovaResponseSe
 import com.linecorp.clova.extension.converter.jackson.serializer.ContentLayerSerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.ContextSerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.DeviceSerializer
+import com.linecorp.clova.extension.converter.jackson.serializer.DirectiveSerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.DisplaySerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.ResponseBodySerializer
 import com.linecorp.clova.extension.converter.jackson.serializer.SpeechInfoSerializer
@@ -51,6 +52,7 @@ internal fun clovaObjectMapper(isVerifyProperties: Boolean = true): ObjectMapper
         addSerializer(SpeechSerializer())
         addSerializer(SpeechInfoSerializer())
         addSerializer(ProgressReportSerializer())
+        addSerializer(DirectiveSerializer())
 
         addDeserializer(
                 CustomExtensionRequest::class.java, RequestDeserializer(isVerifyProperties))

@@ -5,6 +5,14 @@
 
 package com.linecorp.clova.extension.model.response
 
+import com.linecorp.clova.extension.model.audio.AudioItem
+import com.linecorp.clova.extension.model.audio.AudioSource
+import com.linecorp.clova.extension.model.audio.AudioStreamInfo
+import com.linecorp.clova.extension.model.audio.PlayBehavior
+import com.linecorp.clova.extension.model.directive.Directive
+import com.linecorp.clova.extension.model.directive.DirectiveName
+import com.linecorp.clova.extension.model.directive.DirectiveNameSpace
+import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -55,7 +63,7 @@ class ResponseBuilderTest {
     }
 
     @Test
-    internal fun testReprompt() {
+    fun testReprompt() {
         val response = ResponseBuilder().apply {
             outputSpeech = SimpleSpeech(
                     SpeechInfo(
@@ -70,5 +78,32 @@ class ResponseBuilderTest {
         assertTrue("repeat" == reprompt.values.value)
         assertTrue(SupportedLanguage.JA == reprompt.values.lang)
         assertTrue(SpeechInfoType.PlainText == reprompt.values.type)
+    }
+
+    @Test
+    fun testDirectives() {
+        val factory = Directive.AudioPlayFactory(requestId = "test")
+        val audioPlayPayload = AudioPlayPayload(
+                audioItem = AudioItem(
+                        audioItemId = "abcde",
+                        titleText = "test",
+                        titleSubText1 = "subTest1",
+                        stream = AudioStreamInfo(
+                                token = "token",
+                                url = "http://test.com",
+                                urlPlayable = true,
+                                beginAtInMilliseconds = 10)),
+                source = AudioSource(name = "wahaha"),
+                playBehavior = PlayBehavior.REPLACE_ALL
+        )
+        val response = ResponseBuilder().apply {
+            directives = arrayListOf(factory.getPlay(audioPlayPayload))
+        }
+
+        assertTrue(response.directives.size == 1)
+        val header = response.directives[0].header
+        assertTrue(header.name == DirectiveName.PLAY)
+        assertTrue(header.nameSpace == DirectiveNameSpace.AUDIO_PLAYER)
+        assertTrue(header.dialogRequestId == "test")
     }
 }

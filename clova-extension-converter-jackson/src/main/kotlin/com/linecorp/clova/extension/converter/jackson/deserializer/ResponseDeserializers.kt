@@ -17,6 +17,6 @@ internal class ResponseDeserializer :
 
         val factory = ResponseDataFactory()
         val node: JsonNode = parser.readValueAsTree()
-        return factory.toClovaExtensionResponse(node)
+        return factory.getClovaExtensionResponse(node)
     }
 }

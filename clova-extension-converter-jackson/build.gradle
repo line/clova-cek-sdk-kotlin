@@ -1,7 +1,6 @@
 group = "com.linecorp"
 version = "${SDK_VERSION}"
 
-//apply from: "../deploy.gradle"
 apply from: "../deploy-bintray.gradle"
 apply from: "../document-gen.gradle"
 
