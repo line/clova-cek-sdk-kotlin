@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import com.linecorp.clova.extension.converter.jackson.writeFields
 import com.linecorp.clova.extension.model.JsonProperties
+import com.linecorp.clova.extension.model.directive.Directive
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
 import com.linecorp.clova.extension.model.response.ResponseBody
 import com.linecorp.clova.extension.model.response.SimpleSpeech
@@ -32,11 +33,15 @@ internal class ResponseBodySerializer : StdSerializer<ResponseBody>(ResponseBody
     override fun serialize(value: ResponseBody, generator: JsonGenerator, provider: SerializerProvider) {
         generator.writeFields {
             writeObjectField(JsonProperties.OUTPUT_SPEECH, value.outputSpeech)
+            //TODO: card is not supported yet
             writeFieldName(JsonProperties.CARD)
             writeStartObject()
             writeEndObject()
 
             writeArrayFieldStart(JsonProperties.DIRECTIVES)
+            value.directives.forEach { directive ->
+                writeObject(directive)
+            }
             writeEndArray()
             writeBooleanField(JsonProperties.SHOULD_END_SESSION, value.shouldEndSession)
             value.reprompt?.let {
@@ -84,6 +89,16 @@ internal class SpeechInfoSerializer : StdSerializer<SpeechInfo>(SpeechInfo::clas
             writeStringField(JsonProperties.TYPE, value.type.toString())
             writeStringField(JsonProperties.LANGUAGE, value.lang.toString())
             writeStringField(JsonProperties.VALUE, value.value)
+        }
+    }
+}
+
+internal class DirectiveSerializer : StdSerializer<Directive>(Directive::class.java) {
+    @Throws(IOException::class, JsonProcessingException::class)
+    override fun serialize(value: Directive, generator: JsonGenerator, provider: SerializerProvider) {
+        generator.writeFields {
+            writeObjectField(JsonProperties.HEADER, value.header)
+            writeObjectField(JsonProperties.PAYLOAD, value.payload)
         }
     }
 }

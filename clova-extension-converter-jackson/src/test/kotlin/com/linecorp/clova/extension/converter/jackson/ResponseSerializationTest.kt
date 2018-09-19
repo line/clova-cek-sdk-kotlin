@@ -1,6 +1,12 @@
 package com.linecorp.clova.extension.converter.jackson
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.linecorp.clova.extension.model.audio.AudioItem
+import com.linecorp.clova.extension.model.audio.AudioSource
+import com.linecorp.clova.extension.model.audio.AudioStreamInfo
+import com.linecorp.clova.extension.model.audio.PlayBehavior
+import com.linecorp.clova.extension.model.directive.Directive
+import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
 import com.linecorp.clova.extension.model.response.ResponseBody
 import com.linecorp.clova.extension.model.response.SimpleSpeech
@@ -192,6 +198,99 @@ class ResponseSerializationTest {
         assertTrue(result == "{\"version\":\"0.1.0\",\"sessionAttributes\":{\"myValue\":1234,\"myStr\":\"TEST\"},\"response\":{" +
                 "\"outputSpeech\":{\"type\":\"SimpleSpeech\",\"values\":{\"type\":\"PlainText\",\"lang\":\"en\",\"value\":\"This is test\"}}," +
                 "\"card\":{},\"directives\":[],\"shouldEndSession\":false}}")
+    }
+
+    @Test
+    internal fun testDirectives() {
+        val factory = Directive.AudioPlayFactory(requestId = "test")
+        val audioPlayPayload = AudioPlayPayload(
+                audioItem = AudioItem(
+                        audioItemId = "abcde",
+                        titleText = "test",
+                        titleSubText1 = "subTest1",
+                        stream = AudioStreamInfo(
+                                token = "token",
+                                url = "http://test.com",
+                                urlPlayable = true,
+                                beginAtInMilliseconds = 10)),
+                source = AudioSource(name = "wahaha", logoUrl = "http://test.com"),
+                playBehavior = PlayBehavior.REPLACE_ALL
+        )
+        val clovaResponse = ClovaExtensionResponse(
+                version = "0.1.0",
+                sessionAttributes = mapOf(),
+                responseBody = ResponseBody(
+                        outputSpeech = SimpleSpeech(
+                                values = SpeechInfo(
+                                        type = SpeechInfoType.PlainText,
+                                        lang = SupportedLanguage.EN,
+                                        value = "This is test"
+                                )
+                        ),
+                        directives = arrayListOf(factory.getPlay(audioPlayPayload)),
+                        cards = arrayListOf(),
+                        shouldEndSession = false,
+                        reprompt = SimpleSpeech(
+                                values = SpeechInfo(
+                                        type = SpeechInfoType.PlainText,
+                                        lang = SupportedLanguage.EN,
+                                        value = "This is reprompt test"
+                                )
+                        )
+                )
+        )
+
+        val result = mapper.writeValueAsString(clovaResponse)
+        val expected =
+                "{" +
+                    "\"version\":\"0.1.0\"," +
+                    "\"sessionAttributes\":{}," +
+                    "\"response\":{" +
+                        "\"outputSpeech\":{" +
+                        "\"type\":\"SimpleSpeech\"," +
+                        "\"values\":{" +
+                            "\"type\":\"PlainText\"," +
+                            "\"lang\":\"en\"," +
+                            "\"value\":\"This is test\"" +
+                        "}" +
+                    "}," +
+                    "\"card\":{}," +
+                    "\"directives\":[{" +
+                        "\"header\":{" +
+                            "\"name\":\"Play\"," +
+                            "\"nameSpace\":\"AudioPlayer\"," +
+                            "\"dialogRequestId\":\"test\"," +
+                            "\"messageId\":\"${clovaResponse.responseBody.directives[0].header.messageId}\"" +
+                        "}," +
+                        "\"payload\":{" +
+                            "\"audioItem\":{" +
+                                "\"audioItemId\":\"abcde\"," +
+                                "\"titleText\":\"test\"," +
+                                "\"stream\":{" +
+                                    "\"token\":\"token\"," +
+                                    "\"url\":\"http://test.com\"," +
+                                    "\"urlPlayable\":true," +
+                                    "\"beginAtInMilliseconds\":10" +
+                                "}," +
+                                "\"titleSubText1\":\"subTest1\"" +
+                            "}," +
+                            "\"source\":{" +
+                                "\"name\":\"wahaha\"," +
+                                "\"logoUrl\":\"http://test.com\"" +
+                            "}," +
+                        "\"playBehavior\":\"REPLACE_ALL\"" +
+                        "}" +
+                    "}]," +
+                    "\"shouldEndSession\":false," +
+                    "\"reprompt\":{" +
+                        "\"outputSpeech\":{" +
+                        "\"type\":\"SimpleSpeech\"," +
+                        "\"values\":{" +
+                            "\"type\":\"PlainText\"," +
+                            "\"lang\":\"en\"," +
+                            "\"value\":\"This is reprompt test\"}}}}}"
+
+        assertTrue(result == expected)
     }
 
     @BeforeEach

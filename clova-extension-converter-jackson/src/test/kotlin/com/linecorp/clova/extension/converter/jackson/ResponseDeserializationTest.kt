@@ -1,6 +1,10 @@
 package com.linecorp.clova.extension.converter.jackson
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.linecorp.clova.extension.model.audio.PlayBehavior
+import com.linecorp.clova.extension.model.directive.DirectiveName
+import com.linecorp.clova.extension.model.directive.DirectiveNameSpace
+import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
 import com.linecorp.clova.extension.model.response.SimpleSpeech
 import com.linecorp.clova.extension.model.response.SpeechInfo
@@ -92,6 +96,47 @@ class ResponseDeserializationTest {
             "  }\n" +
             "}"
 
+    private val simpleSpeechResponseWithDirectiveSample: String = "{\n" +
+            "  \"version\": \"0.1.0\",\n" +
+            "  \"sessionAttributes\": {},\n" +
+            "  \"response\": {\n" +
+            "    \"outputSpeech\": {\n" +
+            "      \"type\": \"SimpleSpeech\",\n" +
+            "      \"values\": {\n" +
+            "        \"type\": \"PlainText\",\n" +
+            "        \"lang\": \"en\",\n" +
+            "        \"value\": \"This is test\"\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"card\": {},\n" +
+            "    \"directives\": [{" +
+                    "\"header\":{" +
+                        "\"messageId\":\"05796344-9089-4f05-a951-0af0e4046e73\"," +
+                        "\"name\":\"Play\"," +
+                        "\"nameSpace\":\"AudioPlayer\"," +
+                        "\"dialogRequestId\":\"test\"" +
+                    "}," +
+                    "\"payload\":{" +
+                        "\"audioItem\":{" +
+                            "\"audioItemId\":\"abcde\"," +
+                            "\"titleText\":\"test\"," +
+                            "\"stream\":{" +
+                                "\"token\":\"token\"," +
+                                "\"url\":\"http://test.com\"," +
+                                "\"urlPlayable\":true," +
+                                "\"beginAtInMilliseconds\":10" +
+                            "}," +
+                            "\"titleSubText1\":\"subTest1\"" +
+                        "}," +
+                        "\"source\":{" +
+                            "\"name\":\"wahaha\"," +
+                            "\"logoUrl\":\"http://test.com\"" +
+                        "}," +
+                        "\"playBehavior\":\"REPLACE_ALL\"}}],\n" +
+            "    \"shouldEndSession\": false\n" +
+            "  }\n" +
+            "}"
+
     @Test
     fun testSimpleSpeechResponse() {
         val response = mapper.readValue(simpleSpeechResponseSample, ClovaExtensionResponse::class.java)
@@ -133,6 +178,23 @@ class ResponseDeserializationTest {
         assertTrue(2 == verbose.values.size)
         assertTrue(SupportedLanguage.JA == verbose.values[0].lang)
         assertTrue(SpeechInfoType.PlainText == verbose.values[0].type)
+    }
+
+    @Test
+    internal fun testResponseWithAudioPlayDirective() {
+        val response = mapper.readValue(simpleSpeechResponseWithDirectiveSample, ClovaExtensionResponse::class.java)
+        assertTrue(response.responseBody.directives.size == 1)
+        val directive = response.responseBody.directives[0]
+        assertTrue(directive.header.name == DirectiveName.PLAY)
+        assertTrue(directive.header.nameSpace == DirectiveNameSpace.AUDIO_PLAYER)
+        assertTrue(directive.header.messageId == "05796344-9089-4f05-a951-0af0e4046e73")
+        assertTrue(directive.header.dialogRequestId == "test")
+
+        assertTrue(directive.payload is AudioPlayPayload)
+        val audioPlayPayload = directive.payload as AudioPlayPayload
+        assertTrue(audioPlayPayload.audioItem.stream.url == "http://test.com")
+        assertTrue(audioPlayPayload.playBehavior == PlayBehavior.REPLACE_ALL)
+        assertTrue(audioPlayPayload.source.name == "wahaha")
     }
 
     @BeforeEach

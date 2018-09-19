@@ -1,5 +1,7 @@
 package com.linecorp.clova.extension.model.response
 
+import com.linecorp.clova.extension.model.directive.Directive
+
 /**
  * The Clova extension response
  *
@@ -24,8 +26,7 @@ data class ClovaExtensionResponse (
  */
 data class ResponseBody (
         val outputSpeech: Speech,
-        //TODO implement it later
-        val directives: ArrayList<String>,
+        val directives: ArrayList<Directive>,
         val cards: ArrayList<String>,
         val shouldEndSession: Boolean,
         val reprompt: Speech? = null

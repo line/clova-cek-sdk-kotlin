@@ -6,6 +6,7 @@
 package com.linecorp.clova.extension.model.response
 
 import com.linecorp.clova.extension.API_VERSION
+import com.linecorp.clova.extension.model.directive.Directive
 
 /**
  * The clova response builder
@@ -21,6 +22,11 @@ class ResponseBuilder {
     var outputSpeech: Speech? = null
 
     var repromptMessage: String? = null
+
+    var directives: ArrayList<Directive> = arrayListOf()
+
+    //TODO: cards is not supported yet.
+    private val cards: ArrayList<String> = arrayListOf()
 
     fun build(): ClovaExtensionResponse {
         if (outputSpeech == null) {
@@ -41,8 +47,8 @@ class ResponseBuilder {
                 sessionAttributes = sessionAttributes,
                 responseBody = ResponseBody(
                         outputSpeech = outputSpeech!!,
-                        directives = arrayListOf(),
-                        cards = arrayListOf(),
+                        directives = directives,
+                        cards = cards,
                         shouldEndSession = shouldEndSession,
                         reprompt = reprompt
                 )
