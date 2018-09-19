@@ -1,6 +1,5 @@
 package com.linecorp.clova.extension.converter.jackson.deserializer
 
-import com.fasterxml.jackson.core.JsonpCharacterEscapes
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -8,15 +7,14 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.linecorp.clova.extension.converter.jackson.validateJsonProperty
 import com.linecorp.clova.extension.exception.MissingJsonPropertyException
 import com.linecorp.clova.extension.model.JsonProperties
-import com.linecorp.clova.extension.model.audio.AudioItem
-import com.linecorp.clova.extension.model.audio.AudioSource
-import com.linecorp.clova.extension.model.audio.PlayBehavior
-import com.linecorp.clova.extension.model.core.Payload
+import com.linecorp.clova.extension.model.payload.Payload
 import com.linecorp.clova.extension.model.directive.Directive
 import com.linecorp.clova.extension.model.directive.DirectiveHeader
 import com.linecorp.clova.extension.model.directive.DirectiveName
 import com.linecorp.clova.extension.model.directive.DirectiveNameSpace
 import com.linecorp.clova.extension.model.payload.AudioPlayPayload
+import com.linecorp.clova.extension.model.payload.EmptyPayload
+import com.linecorp.clova.extension.model.payload.StreamDeliverPayload
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
 import com.linecorp.clova.extension.model.response.ResponseBody
 import com.linecorp.clova.extension.model.response.SimpleSpeech
@@ -142,12 +140,14 @@ internal class ResponseDataFactory {
     private fun createPayload(name: String, nameSpace: String, node: JsonNode): Payload =
             when (nameSpace) {
                 DirectiveNameSpace.AUDIO_PLAYER -> createAudioPlaybackPayload(name, node)
-                else -> TODO("not implemented yet")
+                DirectiveNameSpace.PLAYBACK_CONTROLLER -> EmptyPayload()
+                else -> EmptyPayload()
             }
 
     private fun createAudioPlaybackPayload(name: String, node: JsonNode): Payload =
             when (name) {
                 DirectiveName.PLAY -> objectMapper.convertValue(node, AudioPlayPayload::class.java)
+                DirectiveName.STREAM_DELIVER -> objectMapper.convertValue(node, StreamDeliverPayload::class.java)
                 else -> TODO("not implemented yet")
             }
 }
