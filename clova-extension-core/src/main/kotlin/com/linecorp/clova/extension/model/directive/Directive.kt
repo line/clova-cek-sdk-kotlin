@@ -5,9 +5,10 @@
 
 package com.linecorp.clova.extension.model.directive
 
-import com.linecorp.clova.extension.model.core.Payload
+import com.linecorp.clova.extension.model.payload.Payload
 import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import com.linecorp.clova.extension.model.payload.EmptyPayload
+import com.linecorp.clova.extension.model.payload.StreamDeliverPayload
 import java.util.*
 
 data class Directive(
@@ -20,9 +21,54 @@ data class Directive(
      * @property requestId The request ID from Clova
      */
     class AudioPlayFactory(private val requestId: String) {
+
+        /**
+         * Get the AudioPlayer.Play directive
+         */
         fun getPlay(audioPlayPayload: AudioPlayPayload): Directive = Directive(
-                header = DirectiveHeader.Factory().getPlay(requestId),
+                header = DirectiveHeader.Factory().getAudioPlay(requestId),
                 payload = audioPlayPayload
+        )
+
+        /**
+         * Get the AudioPlayer.StreamDeliver directive
+         */
+        fun getStreamDeliver(streamDeliverPayload: StreamDeliverPayload): Directive = Directive(
+                header = DirectiveHeader.Factory().getStreamDeliver(requestId),
+                payload = streamDeliverPayload
+        )
+    }
+
+
+    /**
+     * The factory class for PlaybackController directives
+     *
+     * @property requestId The request ID from Clova
+     */
+    class PlaybackController(private val requestId: String) {
+
+        /**
+         * Get the PlaybackController.Pause directive
+         */
+        fun getPause(): Directive = Directive(
+                header = DirectiveHeader.Factory().getPlaybackControllerPause(requestId = requestId),
+                payload = EmptyPayload()
+        )
+
+        /**
+         * Get the PlaybackController.Resume directive
+         */
+        fun getResume(): Directive = Directive(
+                header = DirectiveHeader.Factory().getPlaybackControllerResume(requestId = requestId),
+                payload = EmptyPayload()
+        )
+
+        /**
+         * Get the PlaybackController.Stop directive
+         */
+        fun getStop(): Directive = Directive(
+                header = DirectiveHeader.Factory().getPlaybackControllerStop(requestId = requestId),
+                payload = EmptyPayload()
         )
     }
 }
@@ -38,9 +84,37 @@ data class DirectiveHeader(
 ) {
     class Factory {
         private val messageId = UUID.randomUUID().toString()
-        fun getPlay(requestId: String) = DirectiveHeader(
+        fun getAudioPlay(requestId: String) = DirectiveHeader(
                 name = DirectiveName.PLAY,
                 nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
+                dialogRequestId = requestId,
+                messageId = messageId
+        )
+
+        fun getStreamDeliver(requestId: String) = DirectiveHeader(
+                name = DirectiveName.STREAM_DELIVER,
+                nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
+                dialogRequestId = requestId,
+                messageId = messageId
+        )
+
+        fun getPlaybackControllerPause(requestId: String) = DirectiveHeader(
+                name = DirectiveName.PAUSE,
+                nameSpace = DirectiveNameSpace.PLAYBACK_CONTROLLER,
+                dialogRequestId = requestId,
+                messageId = messageId
+        )
+
+        fun getPlaybackControllerResume(requestId: String) = DirectiveHeader(
+                name = DirectiveName.RESUME,
+                nameSpace = DirectiveNameSpace.PLAYBACK_CONTROLLER,
+                dialogRequestId = requestId,
+                messageId = messageId
+        )
+
+        fun getPlaybackControllerStop(requestId: String) = DirectiveHeader(
+                name = DirectiveName.STOP,
+                nameSpace = DirectiveNameSpace.PLAYBACK_CONTROLLER,
                 dialogRequestId = requestId,
                 messageId = messageId
         )

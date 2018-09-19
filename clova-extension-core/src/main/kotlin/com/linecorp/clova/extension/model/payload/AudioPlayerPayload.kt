@@ -7,8 +7,8 @@ package com.linecorp.clova.extension.model.payload
 
 import com.linecorp.clova.extension.model.audio.AudioItem
 import com.linecorp.clova.extension.model.audio.AudioSource
+import com.linecorp.clova.extension.model.audio.AudioStreamInfo
 import com.linecorp.clova.extension.model.audio.PlayBehavior
-import com.linecorp.clova.extension.model.core.Payload
 
 /**
  * The payload for AudioPlayer.Play directive
@@ -18,4 +18,10 @@ data class AudioPlayPayload(
         val audioItem: AudioItem,
         val source: AudioSource,
         val playBehavior: PlayBehavior
+) : Payload
+
+
+data class StreamDeliverPayload(
+        val audioItemId: String,
+        val stream: AudioStreamInfo
 ) : Payload

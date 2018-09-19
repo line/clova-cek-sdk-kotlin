@@ -5,6 +5,4 @@
 
 package com.linecorp.clova.extension.model.payload
 
-import com.linecorp.clova.extension.model.core.Payload
-
 class EmptyPayload : Payload
