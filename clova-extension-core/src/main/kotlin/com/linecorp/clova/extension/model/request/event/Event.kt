@@ -7,6 +7,7 @@ package com.linecorp.clova.extension.model.request.event
 
 import com.linecorp.clova.extension.model.directive.DirectiveName
 import com.linecorp.clova.extension.model.directive.DirectiveNameSpace
+import com.linecorp.clova.extension.model.payload.AudioStreamPayload
 import com.linecorp.clova.extension.model.payload.EmptyPayload
 import com.linecorp.clova.extension.model.payload.Payload
 import com.linecorp.clova.extension.model.payload.PlayStatusPayload
@@ -45,7 +46,7 @@ data class Event(
                 payload = payload
         )
 
-        fun getPlayPause(payload: PlayStatusPayload): Event = Event(
+        fun getPlayPaused(payload: PlayStatusPayload): Event = Event(
                 nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
                 name = DirectiveName.PLAY_PAUSED,
                 payload = payload
@@ -60,6 +61,12 @@ data class Event(
         fun getPlayStopped(payload: PlayStatusPayload): Event = Event(
                 nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
                 name = DirectiveName.PLAY_STOPPED,
+                payload = payload
+        )
+
+        fun getPlayResumed(payload: PlayStatusPayload): Event = Event(
+                nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
+                name = DirectiveName.PLAY_RESUMED,
                 payload = payload
         )
 
@@ -78,6 +85,12 @@ data class Event(
         fun getProgressReportPositionPassed(payload: PlayStatusPayload): Event = Event(
                 nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
                 name = DirectiveName.PROGRESS_REPORT_POSITION_PASSED,
+                payload = payload
+        )
+
+        fun getStreamRequested(payload: AudioStreamPayload): Event = Event(
+                nameSpace = DirectiveNameSpace.AUDIO_PLAYER,
+                name = DirectiveName.STREAM_REQUESTED,
                 payload = payload
         )
     }

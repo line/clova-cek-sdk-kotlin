@@ -17,6 +17,6 @@ internal class RequestDeserializer(val isVerifyProperties: Boolean) :
 
         val factory = RequestDataFactory(parser, isVerifyProperties)
         val node: JsonNode = parser.readValueAsTree()
-        return factory.toCustomExtensionRequest(node)
+        return factory.getCustomExtensionRequest(node)
     }
 }

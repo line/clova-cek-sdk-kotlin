@@ -15,7 +15,7 @@
       "header":{
         "messageId":"05796344-9089-4f05-a951-0af0e4046e73",
         "name":"Play",
-        "nameSpace":"AudioPlayer",
+        "namespace":"AudioPlayer",
         "dialogRequestId":"test"
       },
       "payload":{
