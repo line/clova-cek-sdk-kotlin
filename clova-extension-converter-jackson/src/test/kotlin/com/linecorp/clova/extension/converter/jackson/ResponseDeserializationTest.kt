@@ -23,123 +23,10 @@ class ResponseDeserializationTest {
 
     lateinit var mapper: ObjectMapper
 
-    private val simpleSpeechResponseSample: String = "{\n" +
-            "  \"version\": \"0.1.0\",\n" +
-            "  \"sessionAttributes\": {},\n" +
-            "  \"response\": {\n" +
-            "    \"outputSpeech\": {\n" +
-            "      \"type\": \"SimpleSpeech\",\n" +
-            "      \"values\": {\n" +
-            "        \"type\": \"PlainText\",\n" +
-            "        \"lang\": \"en\",\n" +
-            "        \"value\": \"This is test\"\n" +
-            "      }\n" +
-            "    },\n" +
-            "    \"card\": {},\n" +
-            "    \"directives\": [],\n" +
-            "    \"shouldEndSession\": false\n" +
-            "  }\n" +
-            "}"
-
-    private val speechListResponseSample: String = "{\n" +
-            "  \"version\": \"0.1.0\",\n" +
-            "  \"sessionAttributes\": {},\n" +
-            "  \"response\": {\n" +
-            "    \"outputSpeech\": {\n" +
-            "      \"type\": \"SpeechList\",\n" +
-            "      \"values\": [{\n" +
-            "         \"type\": \"PlainText\",\n" +
-            "         \"lang\": \"en\",\n" +
-            "         \"value\": \"This is test1\"\n" +
-            "       },{\n" +
-            "         \"type\": \"URL\",\n" +
-            "         \"lang\": \"ja\",\n" +
-            "         \"value\": \"This is test2\"\n" +
-            "       }]\n" +
-            "     },\n" +
-            "    \"card\": {},\n" +
-            "    \"directives\": [],\n" +
-            "    \"shouldEndSession\": false\n" +
-            "    }" +
-            "}"
-
-    private val speechSetResponseSample: String = "{\n" +
-            "  \"version\": \"0.1.0\",\n" +
-            "  \"sessionAttributes\": {},\n" +
-            "  \"response\": {\n" +
-            "    \"outputSpeech\": {\n" +
-            "      \"type\": \"SpeechSet\",\n" +
-            "      \"brief\": {\n" +
-            "        \"type\": \"PlainText\",\n" +
-            "        \"lang\": \"ja\",\n" +
-            "        \"value\": \"天気予報です。\"\n" +
-            "      },\n" +
-            "      \"verbose\": {\n" +
-            "        \"type\": \"SpeechList\",\n" +
-            "        \"values\": [\n" +
-            "          {\n" +
-            "              \"type\": \"PlainText\",\n" +
-            "              \"lang\": \"ja\",\n" +
-            "              \"value\": \"週末まで全国に梅雨…猛暑和らぐ。\"\n" +
-            "          },\n" +
-            "          {\n" +
-            "              \"type\": \"PlainText\",\n" +
-            "              \"lang\": \"ja\",\n" +
-            "              \"value\": \"明日全国的に梅雨…ところによって局地的に激しい雨に注意。\"\n" +
-            "          }\n" +
-            "        ]\n" +
-            "      }\n" +
-            "    },\n" +
-            "    \"card\": {},\n" +
-            "    \"directives\": [],\n" +
-            "    \"shouldEndSession\": true\n" +
-            "  }\n" +
-            "}"
-
-    private val simpleSpeechResponseWithDirectiveSample: String = "{\n" +
-            "  \"version\": \"0.1.0\",\n" +
-            "  \"sessionAttributes\": {},\n" +
-            "  \"response\": {\n" +
-            "    \"outputSpeech\": {\n" +
-            "      \"type\": \"SimpleSpeech\",\n" +
-            "      \"values\": {\n" +
-            "        \"type\": \"PlainText\",\n" +
-            "        \"lang\": \"en\",\n" +
-            "        \"value\": \"This is test\"\n" +
-            "      }\n" +
-            "    },\n" +
-            "    \"card\": {},\n" +
-            "    \"directives\": [{" +
-                    "\"header\":{" +
-                        "\"messageId\":\"05796344-9089-4f05-a951-0af0e4046e73\"," +
-                        "\"name\":\"Play\"," +
-                        "\"nameSpace\":\"AudioPlayer\"," +
-                        "\"dialogRequestId\":\"test\"" +
-                    "}," +
-                    "\"payload\":{" +
-                        "\"audioItem\":{" +
-                            "\"audioItemId\":\"abcde\"," +
-                            "\"titleText\":\"test\"," +
-                            "\"stream\":{" +
-                                "\"token\":\"token\"," +
-                                "\"url\":\"http://test.com\"," +
-                                "\"urlPlayable\":true," +
-                                "\"beginAtInMilliseconds\":10" +
-                            "}," +
-                            "\"titleSubText1\":\"subTest1\"" +
-                        "}," +
-                        "\"source\":{" +
-                            "\"name\":\"wahaha\"," +
-                            "\"logoUrl\":\"http://test.com\"" +
-                        "}," +
-                        "\"playBehavior\":\"REPLACE_ALL\"}}],\n" +
-            "    \"shouldEndSession\": false\n" +
-            "  }\n" +
-            "}"
-
     @Test
     fun testSimpleSpeechResponse() {
-        val response = mapper.readValue(simpleSpeechResponseSample, ClovaExtensionResponse::class.java)
+        val json = JsonResources("SimpleSpeechResponseSample.json").load()
+        val response = mapper.readValue(json, ClovaExtensionResponse::class.java)
         assertTrue("0.1.0" == response.version)
         assertFalse(response.responseBody.shouldEndSession)
         assertTrue(response.responseBody.outputSpeech is SimpleSpeech)
@@ -150,7 +37,8 @@ class ResponseDeserializationTest {
 
     @Test
     fun testSpeechListResponse() {
-        val response = mapper.readValue(speechListResponseSample, ClovaExtensionResponse::class.java)
+        val json = JsonResources("SpeechListResponseSample.json").load()
+        val response = mapper.readValue(json, ClovaExtensionResponse::class.java)
         assertTrue(response.responseBody.outputSpeech is SpeechList)
         val speechList = response.responseBody.outputSpeech as SpeechList
         assertTrue(2 == speechList.values.size)
@@ -165,7 +53,8 @@ class ResponseDeserializationTest {
 
     @Test
     fun testSpeechSetResponse() {
-        val response = mapper.readValue(speechSetResponseSample, ClovaExtensionResponse::class.java)
+        val json = JsonResources("SpeechSetResponseSample.json").load()
+        val response = mapper.readValue(json, ClovaExtensionResponse::class.java)
         assertTrue(response.responseBody.outputSpeech is SpeechSet)
         val speechSet = response.responseBody.outputSpeech as SpeechSet
         assertTrue(speechSet.values["brief"] is SpeechInfo)
@@ -181,8 +70,9 @@ class ResponseDeserializationTest {
     }
 
     @Test
-    internal fun testResponseWithAudioPlayDirective() {
-        val response = mapper.readValue(simpleSpeechResponseWithDirectiveSample, ClovaExtensionResponse::class.java)
+    fun testResponseWithAudioPlayDirective() {
+        val json = JsonResources("SimpleSpeechResponseWithDirectives.json").load()
+        val response = mapper.readValue(json, ClovaExtensionResponse::class.java)
         assertTrue(response.responseBody.directives.size == 1)
         val directive = response.responseBody.directives[0]
         assertTrue(directive.header.name == DirectiveName.PLAY)
@@ -198,7 +88,7 @@ class ResponseDeserializationTest {
     }
 
     @BeforeEach
-    internal fun setUp() {
+    fun setUp() {
         mapper = clovaObjectMapper()
     }
 }

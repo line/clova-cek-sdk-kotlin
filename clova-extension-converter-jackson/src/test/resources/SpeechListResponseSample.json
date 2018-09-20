@@ -1,0 +1,21 @@
+{
+  "version": "0.1.0",
+  "sessionAttributes": {},
+  "response": {
+    "outputSpeech": {
+      "type": "SpeechList",
+      "values": [{
+        "type": "PlainText",
+        "lang": "en",
+        "value": "This is test1"
+      },{
+        "type": "URL",
+        "lang": "ja",
+        "value": "This is test2"
+      }]
+    },
+    "card": {},
+    "directives": [],
+    "shouldEndSession": false
+  }
+}

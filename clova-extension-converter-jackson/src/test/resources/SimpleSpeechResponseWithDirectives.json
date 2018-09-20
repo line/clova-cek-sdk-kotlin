@@ -1,0 +1,42 @@
+{
+  "version": "0.1.0",
+  "sessionAttributes": {},
+  "response": {
+    "outputSpeech": {
+      "type": "SimpleSpeech",
+      "values": {
+        "type": "PlainText",
+        "lang": "en",
+        "value": "This is test"
+      }
+    },
+    "card": {},
+    "directives": [{
+      "header":{
+        "messageId":"05796344-9089-4f05-a951-0af0e4046e73",
+        "name":"Play",
+        "nameSpace":"AudioPlayer",
+        "dialogRequestId":"test"
+      },
+      "payload":{
+        "audioItem":{
+          "audioItemId":"abcde",
+          "titleText":"test",
+          "stream":{
+            "token":"token",
+            "url":"http://test.com",
+            "urlPlayable":true,
+            "beginAtInMilliseconds":10
+          },
+          "titleSubText1":"subTest1"
+        },
+        "source":{
+          "name":"wahaha",
+          "logoUrl":"http://test.com"
+        },
+        "playBehavior":"REPLACE_ALL"
+      }
+    }],
+    "shouldEndSession": false
+  }
+}
