@@ -14,6 +14,7 @@ import com.linecorp.clova.extension.model.directive.DirectiveName
 import com.linecorp.clova.extension.model.directive.DirectiveNameSpace
 import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import com.linecorp.clova.extension.model.payload.EmptyPayload
+import com.linecorp.clova.extension.model.payload.PlayStatusPayload
 import com.linecorp.clova.extension.model.payload.StreamDeliverPayload
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
 import com.linecorp.clova.extension.model.response.ResponseBody
@@ -147,6 +148,7 @@ internal class ResponseDataFactory {
     private fun createAudioPlaybackPayload(name: String, node: JsonNode): Payload =
             when (name) {
                 DirectiveName.PLAY -> objectMapper.convertValue(node, AudioPlayPayload::class.java)
+                DirectiveName.PLAY_FINISHED -> objectMapper.convertValue(node, PlayStatusPayload::class.java)
                 DirectiveName.STREAM_DELIVER -> objectMapper.convertValue(node, StreamDeliverPayload::class.java)
                 else -> TODO("not implemented yet")
             }
