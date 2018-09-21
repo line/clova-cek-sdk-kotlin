@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "sessionAttributes": {},
+  "response": {
+    "outputSpeech": {
+      "type": "SpeechSet",
+      "brief": {
+        "type": "PlainText",
+        "lang": "ja",
+        "value": "天気予報です。"
+      },
+      "verbose": {
+        "type": "SpeechList",
+        "values": [
+          {
+            "type": "PlainText",
+            "lang": "ja",
+            "value": "週末まで全国に梅雨…猛暑和らぐ。"
+          },
+          {
+            "type": "PlainText",
+            "lang": "ja",
+            "value": "明日全国的に梅雨…ところによって局地的に激しい雨に注意。"
+          }
+        ]
+      }
+    },
+    "card": {},
+    "directives": [],
+    "shouldEndSession": true
+  }
+}

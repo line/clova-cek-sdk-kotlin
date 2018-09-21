@@ -5,6 +5,7 @@ import com.linecorp.clova.extension.exception.IllegalRequestException
 import com.linecorp.clova.extension.model.core.Context
 import com.linecorp.clova.extension.model.request.ClovaRequest
 import com.linecorp.clova.extension.model.request.CustomExtensionRequest
+import com.linecorp.clova.extension.model.request.EventRequest
 import com.linecorp.clova.extension.model.request.IntentRequest
 import com.linecorp.clova.extension.model.request.LaunchRequest
 import com.linecorp.clova.extension.model.request.Session
@@ -70,6 +71,7 @@ class ClovaClient(private val applicationId: String, private val verifier: Reque
     internal var launchHandler: RequestHandler<LaunchRequest>? = null
     internal var intentHandler: RequestHandler<IntentRequest>? = null
     internal var sessionEndedHandler: RequestHandler<SessionEndedRequest>? = null
+    internal var eventHandler: RequestHandler<EventRequest>? = null
 
     /**
      * Handle the custom extension request synchronizedly
@@ -86,19 +88,29 @@ class ClovaClient(private val applicationId: String, private val verifier: Reque
                 handleLaunchRequest(
                         customExtensionRequest.session,
                         customExtensionRequest.context,
-                        customExtensionRequest.request)
+                        customExtensionRequest.request
+                )
             }
             is IntentRequest -> runBlocking {
                 handleIntentRequest(
                         customExtensionRequest.session,
                         customExtensionRequest.context,
-                        customExtensionRequest.request)
+                        customExtensionRequest.request
+                )
             }
             is SessionEndedRequest -> runBlocking {
                 handleSessionEndRequest(
                         customExtensionRequest.session,
                         customExtensionRequest.context,
-                        customExtensionRequest.request)
+                        customExtensionRequest.request
+                )
+            }
+            is EventRequest -> runBlocking {
+                handleEventRequest(
+                        customExtensionRequest.session,
+                        customExtensionRequest.context,
+                        customExtensionRequest.request
+                )
             }
         }
 
@@ -128,6 +140,12 @@ class ClovaClient(private val applicationId: String, private val verifier: Reque
                     customExtensionRequest.request
             )
             is SessionEndedRequest -> handleSessionEndRequest(
+                    customExtensionRequest.session,
+                    customExtensionRequest.context,
+                    customExtensionRequest.request
+            )
+
+            is EventRequest -> handleEventRequest(
                     customExtensionRequest.session,
                     customExtensionRequest.context,
                     customExtensionRequest.request
@@ -193,6 +211,16 @@ class ClovaClient(private val applicationId: String, private val verifier: Reque
         withContext(DefaultDispatcher) {
             sessionEndedHandler?.invoke(request, session) ?: defaultResponse
         }
+
+    private suspend fun handleEventRequest(
+            session: Session,
+            context: Context,
+            request: EventRequest
+    ): ClovaExtensionResponse =
+        withContext(DefaultDispatcher) {
+            eventHandler?.invoke(request, session) ?: defaultResponse
+        }
+
 
     private fun Map<String, List<String>>.getFirstValue(name: String): String =
         this[name]?.let { if (it.isNotEmpty()) it.first() else "" } ?: ""

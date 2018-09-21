@@ -21,7 +21,12 @@ data class AudioPlayPayload(
 ) : Payload
 
 
-data class StreamDeliverPayload(
+data class AudioStreamPayload(
         val audioItemId: String,
         val stream: AudioStreamInfo
+) : Payload
+
+data class PlayStatusPayload(
+        val token: String,
+        val offsetInMilliseconds: Long
 ) : Payload

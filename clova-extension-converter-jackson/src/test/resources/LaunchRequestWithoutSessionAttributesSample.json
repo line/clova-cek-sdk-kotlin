@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "session": {
+    "new": true,
+    "sessionId": "687dcc69-0744-41da-aa4e-a1e6fc9dec0c",
+    "user": {
+      "userId": "durE2hnIQLaKmsMA0mQWpw"
+    }
+  },
+  "context": {
+    "System": {
+      "application": {
+        "applicationId": "idv.freddie.example.echo"
+      },
+      "device": {
+        "deviceId": "65a9ff770ea9f4c9b46643a5612d62eacbc674d7fb56068dc1336af72864b815",
+        "display": {
+          "size": "none",
+          "contentLayer": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      },
+      "user": {
+        "userId": "durE2hnIQLaKmsMA0mQWpw"
+      }
+    }
+  },
+  "request": {
+    "type": "LaunchRequest",
+    "requestId": "f8dcb59c-8493-4b11-a5fd-7102180f19a9",
+    "timestamp": "2018-04-23T09:11:49Z",
+    "locale": "ja-JP",
+    "extensionId": "clova.example",
+    "intent": {
+      "intent": "",
+      "name": "",
+      "slots": null
+    },
+    "event": {
+      "namespace": "",
+      "name": "",
+      "payload": null
+    }
+  }
+}

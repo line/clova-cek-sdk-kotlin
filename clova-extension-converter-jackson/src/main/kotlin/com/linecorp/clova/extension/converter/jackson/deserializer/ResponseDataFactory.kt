@@ -14,7 +14,7 @@ import com.linecorp.clova.extension.model.directive.DirectiveName
 import com.linecorp.clova.extension.model.directive.DirectiveNameSpace
 import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import com.linecorp.clova.extension.model.payload.EmptyPayload
-import com.linecorp.clova.extension.model.payload.StreamDeliverPayload
+import com.linecorp.clova.extension.model.payload.AudioStreamPayload
 import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
 import com.linecorp.clova.extension.model.response.ResponseBody
 import com.linecorp.clova.extension.model.response.SimpleSpeech
@@ -62,7 +62,7 @@ internal class ResponseDataFactory {
             val headerNode = subNode[JsonProperties.HEADER]
             val payloadNode = subNode[JsonProperties.PAYLOAD]
             val name = headerNode[JsonProperties.NAME].asText()
-            val nameSpace = headerNode[JsonProperties.NAME_SPACE].asText()
+            val nameSpace = headerNode[JsonProperties.NAMESPACE].asText()
             directives.add(Directive(
                     header = DirectiveHeader(
                             name = name,
@@ -70,7 +70,7 @@ internal class ResponseDataFactory {
                             messageId = headerNode[JsonProperties.MESSAGE_ID].asText(),
                             dialogRequestId = headerNode[JsonProperties.DIALOG_REQUEST_ID].asText()
                     ),
-                    payload = createPayload(
+                    payload = createDirectivePayload(
                             name = name,
                             nameSpace = nameSpace,
                             node = payloadNode
@@ -79,7 +79,6 @@ internal class ResponseDataFactory {
         }
         return directives
     }
-
 
     @Throws(MissingJsonPropertyException::class)
     fun getSpeech(node: JsonNode): Speech {
@@ -137,17 +136,17 @@ internal class ResponseDataFactory {
         return SpeechList(values = speechList)
     }
 
-    private fun createPayload(name: String, nameSpace: String, node: JsonNode): Payload =
+    private fun createDirectivePayload(name: String, nameSpace: String, node: JsonNode): Payload =
             when (nameSpace) {
-                DirectiveNameSpace.AUDIO_PLAYER -> createAudioPlaybackPayload(name, node)
+                DirectiveNameSpace.AUDIO_PLAYER -> createDirectiveAudioPlaybackPayload(name, node)
                 DirectiveNameSpace.PLAYBACK_CONTROLLER -> EmptyPayload()
                 else -> EmptyPayload()
             }
 
-    private fun createAudioPlaybackPayload(name: String, node: JsonNode): Payload =
+    private fun createDirectiveAudioPlaybackPayload(name: String, node: JsonNode): Payload =
             when (name) {
                 DirectiveName.PLAY -> objectMapper.convertValue(node, AudioPlayPayload::class.java)
-                DirectiveName.STREAM_DELIVER -> objectMapper.convertValue(node, StreamDeliverPayload::class.java)
-                else -> TODO("not implemented yet")
+                DirectiveName.STREAM_DELIVER -> objectMapper.convertValue(node, AudioStreamPayload::class.java)
+                else -> throw IllegalArgumentException("creating payload for $name is not supported yet")
             }
 }

@@ -50,7 +50,7 @@ class ClovaClientTest {
     }
 
     @Test
-    internal fun testIntentRequestDispatch() {
+    fun testIntentRequestDispatch() {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.Intent))
 
@@ -68,7 +68,7 @@ class ClovaClientTest {
     }
 
     @Test
-    internal fun testSessionEndedRequestDispatch() {
+    fun testSessionEndedRequestDispatch() {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.SessionEnded))
 
@@ -85,8 +85,26 @@ class ClovaClientTest {
         }
     }
 
+    @Test
+    fun testEventDispatch() {
+        `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
+                createMockCustomExtensionRequest(RequestType.EventRequest))
+
+        client = clovaClient("test", MockVerifier()) {
+            objectMapper = mockMapper
+            eventHandler { eventRequest, session ->
+                assertTrue("session-id-3064" == session.sessionId)
+                throw RuntimeException("The eventHandler was invoked")
+            }
+        }
+
+        assertThrows<RuntimeException> {
+            val response = client.handleClovaRequest("{}", mapOf())
+        }
+    }
+
     @BeforeEach
-    internal fun setUp() {
+    fun setUp() {
         @SuppressWarnings("unchecked")
         mockMapper = mock(ObjectMapper::class.java) as ObjectMapper<String, String>
         `when`(mockMapper.serialize(anyString())).thenReturn("")

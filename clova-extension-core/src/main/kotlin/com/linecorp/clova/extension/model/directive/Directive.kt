@@ -8,7 +8,7 @@ package com.linecorp.clova.extension.model.directive
 import com.linecorp.clova.extension.model.payload.Payload
 import com.linecorp.clova.extension.model.payload.AudioPlayPayload
 import com.linecorp.clova.extension.model.payload.EmptyPayload
-import com.linecorp.clova.extension.model.payload.StreamDeliverPayload
+import com.linecorp.clova.extension.model.payload.AudioStreamPayload
 import java.util.*
 
 data class Directive(
@@ -33,7 +33,7 @@ data class Directive(
         /**
          * Get the AudioPlayer.StreamDeliver directive
          */
-        fun getStreamDeliver(streamDeliverPayload: StreamDeliverPayload): Directive = Directive(
+        fun getStreamDeliver(streamDeliverPayload: AudioStreamPayload): Directive = Directive(
                 header = DirectiveHeader.Factory().getStreamDeliver(requestId),
                 payload = streamDeliverPayload
         )

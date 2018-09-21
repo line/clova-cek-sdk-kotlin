@@ -11,14 +11,17 @@ import com.linecorp.clova.extension.model.core.Device
 import com.linecorp.clova.extension.model.core.Display
 import com.linecorp.clova.extension.model.core.System
 import com.linecorp.clova.extension.model.core.User
+import com.linecorp.clova.extension.model.payload.PlayStatusPayload
 import com.linecorp.clova.extension.model.request.CustomExtensionRequest
 import com.linecorp.clova.extension.model.request.CustomRequest
+import com.linecorp.clova.extension.model.request.EventRequest
 import com.linecorp.clova.extension.model.request.Intent
 import com.linecorp.clova.extension.model.request.IntentRequest
 import com.linecorp.clova.extension.model.request.LaunchRequest
 import com.linecorp.clova.extension.model.request.RequestType
 import com.linecorp.clova.extension.model.request.Session
 import com.linecorp.clova.extension.model.request.SessionEndedRequest
+import com.linecorp.clova.extension.model.request.event.Event
 
 fun createMockCustomExtensionRequest(requestType: RequestType): CustomExtensionRequest {
     val user = User("userId", "accessToken")
@@ -35,11 +38,23 @@ fun createMockCustomExtensionRequest(requestType: RequestType): CustomExtensionR
                 extensionId = "extension-id",
                 intent = Intent("test", slots = mapOf())
         )
-        RequestType.SessionEnded -> SessionEndedRequest(id = "request-id",
+        RequestType.SessionEnded -> SessionEndedRequest(
+                id = "request-id",
                 timestamp = 1234567,
                 locale = "ja-JP",
                 extensionId = "extension-id",
                 reason = "test")
+
+        RequestType.EventRequest -> EventRequest(
+                id = "event-request",
+                timestamp = 1234567,
+                event = Event.AudioPlayerFactory().getStarted(
+                        payload = PlayStatusPayload(
+                                token = "play-token",
+                                offsetInMilliseconds = 55688
+                        )
+                )
+        )
     }
     return CustomExtensionRequest(
             version = "1.0",

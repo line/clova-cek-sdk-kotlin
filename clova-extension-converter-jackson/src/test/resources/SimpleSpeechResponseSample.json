@@ -1,0 +1,17 @@
+{
+  "version": "0.1.0",
+  "sessionAttributes": {},
+  "response": {
+    "outputSpeech": {
+      "type": "SimpleSpeech",
+      "values": {
+        "type": "PlainText",
+        "lang": "en",
+        "value": "This is test"
+      }
+    },
+    "card": {},
+    "directives": [],
+    "shouldEndSession": false
+  }
+}
