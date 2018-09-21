@@ -5,8 +5,12 @@
 | Name | Summary |
 |---|---|
 | [com.linecorp.clova.extension.model.core.Application](../com.linecorp.clova.extension.model.core/-application/index.md) |  |
-| [com.linecorp.clova.extension.model.core.AudioPlayer](../com.linecorp.clova.extension.model.core/-audio-player/index.md) |  |
-| [com.linecorp.clova.extension.model.core.AudioStreamInfo](../com.linecorp.clova.extension.model.core/-audio-stream-info/index.md) |  |
+| [com.linecorp.clova.extension.model.audio.AudioItem](../com.linecorp.clova.extension.model.audio/-audio-item/index.md) |  |
+| [com.linecorp.clova.extension.model.payload.AudioPlayPayload](../com.linecorp.clova.extension.model.payload/-audio-play-payload/index.md) | The payload for AudioPlayer.Play directive Check [official document](https://clova-developers.line.me/guide/#/CEK/References/CEK_API.md#Play) for detail |
+| [com.linecorp.clova.extension.model.audio.AudioPlayer](../com.linecorp.clova.extension.model.audio/-audio-player/index.md) |  |
+| [com.linecorp.clova.extension.model.audio.AudioSource](../com.linecorp.clova.extension.model.audio/-audio-source/index.md) |  |
+| [com.linecorp.clova.extension.model.audio.AudioStreamInfo](../com.linecorp.clova.extension.model.audio/-audio-stream-info/index.md) |  |
+| [com.linecorp.clova.extension.model.payload.AudioStreamPayload](../com.linecorp.clova.extension.model.payload/-audio-stream-payload/index.md) |  |
 | [com.linecorp.clova.extension.client.ClovaClient](../com.linecorp.clova.extension.client/-clova-client/index.md) | The ClovaClient provides the functionality for handling the requests from Clova platform, SDK also provides a DSL [(example)](../com.linecorp.clova.extension.client/clova-client.md) to create [ClovaClient](../com.linecorp.clova.extension.client/-clova-client/index.md) |
 | [com.linecorp.clova.extension.model.response.ClovaExtensionResponse](../com.linecorp.clova.extension.model.response/-clova-extension-response/index.md) | The Clova extension response |
 | [com.linecorp.clova.extension.model.request.ClovaRequest](../com.linecorp.clova.extension.model.request/-clova-request/index.md) | The basic type of clova request |
@@ -15,8 +19,15 @@
 | [com.linecorp.clova.extension.model.request.CustomExtensionRequest](../com.linecorp.clova.extension.model.request/-custom-extension-request/index.md) | The custom extension request |
 | [com.linecorp.clova.extension.model.request.CustomRequest](../com.linecorp.clova.extension.model.request/-custom-request/index.md) |  |
 | [com.linecorp.clova.extension.model.core.Device](../com.linecorp.clova.extension.model.core/-device/index.md) |  |
+| [com.linecorp.clova.extension.model.directive.Directive](../com.linecorp.clova.extension.model.directive/-directive/index.md) |  |
+| [com.linecorp.clova.extension.model.directive.DirectiveHeader](../com.linecorp.clova.extension.model.directive/-directive-header/index.md) | The header of directive |
+| [com.linecorp.clova.extension.model.directive.DirectiveName](../com.linecorp.clova.extension.model.directive/-directive-name/index.md) |  |
+| [com.linecorp.clova.extension.model.directive.DirectiveNameSpace](../com.linecorp.clova.extension.model.directive/-directive-name-space/index.md) |  |
 | [com.linecorp.clova.extension.model.core.Display](../com.linecorp.clova.extension.model.core/-display/index.md) |  |
 | [com.linecorp.clova.extension.model.core.DisplaySize](../com.linecorp.clova.extension.model.core/-display-size/index.md) |  |
+| [com.linecorp.clova.extension.model.payload.EmptyPayload](../com.linecorp.clova.extension.model.payload/-empty-payload/index.md) |  |
+| [com.linecorp.clova.extension.model.request.event.Event](../com.linecorp.clova.extension.model.request.event/-event/index.md) |  |
+| [com.linecorp.clova.extension.model.request.EventRequest](../com.linecorp.clova.extension.model.request/-event-request/index.md) | The event request, which is used for audio application |
 | [com.linecorp.clova.extension.exception.IllegalRequestException](../com.linecorp.clova.extension.exception/-illegal-request-exception/index.md) | Signals that the Clova responses are illegal. |
 | [com.linecorp.clova.extension.model.request.Intent](../com.linecorp.clova.extension.model.request/-intent/index.md) |  |
 | [com.linecorp.clova.extension.model.request.IntentRequest](../com.linecorp.clova.extension.model.request/-intent-request/index.md) |  |
@@ -26,7 +37,11 @@
 | [com.linecorp.clova.extension.exception.NonsupportedRequestTypeException](../com.linecorp.clova.extension.exception/-nonsupported-request-type-exception/index.md) | Signals that the non-supported requests are received. |
 | [com.linecorp.clova.extension.client.ObjectMapper](../com.linecorp.clova.extension.client/-object-mapper/index.md) | The generic interface for serialize/deserialize the object. To implement this interface to customize the object mapper. |
 | [com.linecorp.clova.extension.model.core.Orientation](../com.linecorp.clova.extension.model.core/-orientation/index.md) |  |
-| [com.linecorp.clova.extension.model.core.PlayerActivity](../com.linecorp.clova.extension.model.core/-player-activity/index.md) |  |
+| [com.linecorp.clova.extension.model.payload.Payload](../com.linecorp.clova.extension.model.payload/-payload.md) |  |
+| [com.linecorp.clova.extension.model.audio.PlayBehavior](../com.linecorp.clova.extension.model.audio/-play-behavior/index.md) |  |
+| [com.linecorp.clova.extension.model.payload.PlayStatusPayload](../com.linecorp.clova.extension.model.payload/-play-status-payload/index.md) |  |
+| [com.linecorp.clova.extension.model.audio.PlayerActivity](../com.linecorp.clova.extension.model.audio/-player-activity/index.md) |  |
+| [com.linecorp.clova.extension.model.audio.ProgressReport](../com.linecorp.clova.extension.model.audio/-progress-report/index.md) |  |
 | [com.linecorp.clova.extension.client.RequestHandler](../com.linecorp.clova.extension.client/-request-handler.md) | The alias of request handler. It is suspend function with two parameters (T, Session) |
 | [com.linecorp.clova.extension.model.request.RequestType](../com.linecorp.clova.extension.model.request/-request-type/index.md) | The type of clova custom request. Clova supports 3 types of requests now |
 | [com.linecorp.clova.extension.client.RequestVerifier](../com.linecorp.clova.extension.client/-request-verifier/index.md) | The clova request verifier. |

@@ -25,6 +25,7 @@ No SessionEnded Request be sent in this case.
 | [Launch](-launch.md) |  |
 | [Intent](-intent.md) |  |
 | [SessionEnded](-session-ended.md) |  |
+| [EventRequest](-event-request.md) |  |
 
 ### Properties
 

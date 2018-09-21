@@ -14,6 +14,7 @@
 
 | Name | Summary |
 |---|---|
+| [EventRequest](../-event-request/index.md) | `data class EventRequest : `[`CustomRequest`](./index.md)<br>The event request, which is used for audio application |
 | [IntentRequest](../-intent-request/index.md) | `data class IntentRequest : `[`CustomRequest`](./index.md) |
 | [LaunchRequest](../-launch-request/index.md) | `data class LaunchRequest : `[`CustomRequest`](./index.md) |
 | [SessionEndedRequest](../-session-ended-request/index.md) | `data class SessionEndedRequest : `[`CustomRequest`](./index.md) |

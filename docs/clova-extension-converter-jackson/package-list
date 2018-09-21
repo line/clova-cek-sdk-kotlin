@@ -2,3 +2,4 @@ $dokka.format:gfm
 $dokka.linkExtension:md
 
 com.linecorp.clova.extension.converter.jackson
+com.linecorp.clova.extension.converter.jackson.serializer.audio

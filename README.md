@@ -20,10 +20,10 @@ repositories {
 
 dependencies {
     //Mandatory
-    implementation "com.linecorp:clova-extension-core:1.0.0"
+    implementation "com.linecorp:clova-extension-core:1.1.0"
 
     //Optional
-    implementation "com.linecorp:clova-extension-converter-jackson:1.0.0" //the data convertor for jackson
+    implementation "com.linecorp:clova-extension-converter-jackson:1.1.0" //the data convertor for jackson
 }
 ```
 

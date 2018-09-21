@@ -2,4 +2,4 @@
 
 # audioPlayer
 
-`val audioPlayer: `[`AudioPlayer`](../-audio-player/index.md)`?`
+`val audioPlayer: `[`AudioPlayer`](../../com.linecorp.clova.extension.model.audio/-audio-player/index.md)`?`

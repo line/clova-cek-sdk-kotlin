@@ -8,11 +8,11 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `Context(system: `[`System`](../-system/index.md)`, audioPlayer: `[`AudioPlayer`](../-audio-player/index.md)`? = null)` |
+| [&lt;init&gt;](-init-.md) | `Context(system: `[`System`](../-system/index.md)`, audioPlayer: `[`AudioPlayer`](../../com.linecorp.clova.extension.model.audio/-audio-player/index.md)`? = null)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [audioPlayer](audio-player.md) | `val audioPlayer: `[`AudioPlayer`](../-audio-player/index.md)`?` |
+| [audioPlayer](audio-player.md) | `val audioPlayer: `[`AudioPlayer`](../../com.linecorp.clova.extension.model.audio/-audio-player/index.md)`?` |
 | [system](system.md) | `val system: `[`System`](../-system/index.md) |

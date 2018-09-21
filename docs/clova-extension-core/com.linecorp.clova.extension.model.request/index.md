@@ -9,6 +9,7 @@
 | [ClovaRequest](-clova-request/index.md) | `open class ClovaRequest`<br>The basic type of clova request |
 | [CustomExtensionRequest](-custom-extension-request/index.md) | `data class CustomExtensionRequest : `[`ClovaRequest`](-clova-request/index.md)<br>The custom extension request |
 | [CustomRequest](-custom-request/index.md) | `sealed class CustomRequest` |
+| [EventRequest](-event-request/index.md) | `data class EventRequest : `[`CustomRequest`](-custom-request/index.md)<br>The event request, which is used for audio application |
 | [Intent](-intent/index.md) | `data class Intent` |
 | [IntentRequest](-intent-request/index.md) | `data class IntentRequest : `[`CustomRequest`](-custom-request/index.md) |
 | [LaunchRequest](-launch-request/index.md) | `data class LaunchRequest : `[`CustomRequest`](-custom-request/index.md) |

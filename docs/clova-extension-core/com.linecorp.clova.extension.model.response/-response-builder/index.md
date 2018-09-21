@@ -20,6 +20,7 @@ The clova response builder
 
 | Name | Summary |
 |---|---|
+| [directives](directives.md) | `var directives: `[`ArrayList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/index.html)`<`[`Directive`](../../com.linecorp.clova.extension.model.directive/-directive/index.md)`>` |
 | [outputSpeech](output-speech.md) | `var outputSpeech: `[`Speech`](../-speech.md)`?` |
 | [repromptMessage](reprompt-message.md) | `var repromptMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
 | [responseLanguage](response-language.md) | `var responseLanguage: `[`SupportedLanguage`](../-supported-language/index.md) |

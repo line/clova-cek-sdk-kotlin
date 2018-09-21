@@ -1,0 +1,5 @@
+[clova-extension-core](../../index.md) / [com.linecorp.clova.extension.model.audio](../index.md) / [AudioItem](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`AudioItem(audioItemId: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, titleText: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, artImageUrl: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, headerText: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, stream: `[`AudioStreamInfo`](../-audio-stream-info/index.md)`, titleSubText1: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, titleSubText2: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null)`

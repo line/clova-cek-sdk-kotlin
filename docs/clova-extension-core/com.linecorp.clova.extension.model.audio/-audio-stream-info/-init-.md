@@ -1,0 +1,5 @@
+[clova-extension-core](../../index.md) / [com.linecorp.clova.extension.model.audio](../index.md) / [AudioStreamInfo](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`AudioStreamInfo(token: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, url: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, urlPlayable: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`, beginAtInMilliseconds: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, durationInMilliseconds: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, customData: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, progressReport: `[`ProgressReport`](../-progress-report/index.md)`? = null)`

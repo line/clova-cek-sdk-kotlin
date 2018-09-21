@@ -2,7 +2,7 @@
 
 # directives
 
-`val directives: `[`ArrayList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>`
+`val directives: `[`ArrayList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/index.html)`<`[`Directive`](../../com.linecorp.clova.extension.model.directive/-directive/index.md)`>`
 
 The extra data that Clova response to client, client need to handle it separately. It is not supported in this SDK yet.
 

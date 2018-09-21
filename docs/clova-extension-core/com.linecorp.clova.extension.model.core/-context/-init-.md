@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`Context(system: `[`System`](../-system/index.md)`, audioPlayer: `[`AudioPlayer`](../-audio-player/index.md)`? = null)`
+`Context(system: `[`System`](../-system/index.md)`, audioPlayer: `[`AudioPlayer`](../../com.linecorp.clova.extension.model.audio/-audio-player/index.md)`? = null)`
