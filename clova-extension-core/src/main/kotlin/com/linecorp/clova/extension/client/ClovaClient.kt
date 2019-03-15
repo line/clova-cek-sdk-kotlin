@@ -226,7 +226,7 @@ class ClovaClient(private val applicationId: String, private val verifier: Reque
         this[name]?.let { if (it.isNotEmpty()) it.first() else "" } ?: ""
 
     companion object {
-        private val defaultResponse = simpleResponse("")
+        private val defaultResponse = simpleResponse("", true)
         internal const val HEADER_SIGNATURE: String = "SignatureCEK"
     }
 }

@@ -11,7 +11,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion"
     implementation "org.slf4j:slf4j-api:1.7.25"
 
-    testImplementation "org.mockito:mockito-core:2.18.3"
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
