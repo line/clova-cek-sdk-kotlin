@@ -9,6 +9,8 @@ import com.linecorp.clova.extension.mock.MockVerifier
 import com.linecorp.clova.extension.mock.createMockCustomExtensionRequest
 import com.linecorp.clova.extension.model.request.CustomExtensionRequest
 import com.linecorp.clova.extension.model.request.RequestType
+import com.linecorp.clova.extension.model.response.ClovaExtensionResponse
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -31,7 +33,7 @@ class ClovaClientTest {
     }
 
     @Test
-    fun testLaunchHandlerDispatch() {
+    fun testLaunchRequestDispatch() {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.Launch))
         
@@ -47,6 +49,23 @@ class ClovaClientTest {
         assertThrows<RuntimeException> {
             val response = client.handleClovaRequest("{}", mapOf())
         }
+    }
+
+    @Test
+    fun testLaunchRequestDispatchWithoutHandler() {
+        `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
+                createMockCustomExtensionRequest(RequestType.Launch))
+        val captor = argumentCaptor<ClovaExtensionResponse>();
+        `when`(mockMapper.serialize(captor.capture())).thenReturn("");
+
+        client = clovaClient("sdk.test", MockVerifier()) {
+            objectMapper = mockMapper
+        }
+
+        client.handleClovaRequest("{}", mapOf())
+
+        val actualResponse = captor.firstValue;
+        assertTrue(actualResponse.responseBody.shouldEndSession)
     }
 
     @Test
@@ -68,6 +87,23 @@ class ClovaClientTest {
     }
 
     @Test
+    fun testIntentRequestDispatchWithoutHandler() {
+        `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
+                createMockCustomExtensionRequest(RequestType.Intent))
+        val captor = argumentCaptor<ClovaExtensionResponse>();
+        `when`(mockMapper.serialize(captor.capture())).thenReturn("");
+
+        client = clovaClient("sdk.test", MockVerifier()) {
+            objectMapper = mockMapper
+        }
+
+        client.handleClovaRequest("{}", mapOf())
+
+        val actualResponse = captor.firstValue;
+        assertTrue(actualResponse.responseBody.shouldEndSession)
+    }
+
+    @Test
     fun testSessionEndedRequestDispatch() {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.SessionEnded))
@@ -86,7 +122,24 @@ class ClovaClientTest {
     }
 
     @Test
-    fun testEventDispatch() {
+    fun testSessionEndedDispatchWithoutHandler() {
+        `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
+                createMockCustomExtensionRequest(RequestType.SessionEnded))
+        val captor = argumentCaptor<ClovaExtensionResponse>();
+        `when`(mockMapper.serialize(captor.capture())).thenReturn("");
+
+        client = clovaClient("sdk.test", MockVerifier()) {
+            objectMapper = mockMapper
+        }
+
+        client.handleClovaRequest("{}", mapOf())
+
+        val actualResponse = captor.firstValue;
+        assertTrue(actualResponse.responseBody.shouldEndSession)
+    }
+
+    @Test
+    fun testEventRequestDispatch() {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.EventRequest))
 
@@ -101,6 +154,23 @@ class ClovaClientTest {
         assertThrows<RuntimeException> {
             val response = client.handleClovaRequest("{}", mapOf())
         }
+    }
+
+    @Test
+    fun testEventRequestDispatchWithoutHandler() {
+        `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
+                createMockCustomExtensionRequest(RequestType.EventRequest))
+        val captor = argumentCaptor<ClovaExtensionResponse>();
+        `when`(mockMapper.serialize(captor.capture())).thenReturn("");
+
+        client = clovaClient("sdk.test", MockVerifier()) {
+            objectMapper = mockMapper
+        }
+
+        client.handleClovaRequest("{}", mapOf())
+
+        val actualResponse = captor.firstValue;
+        assertTrue(actualResponse.responseBody.shouldEndSession)
     }
 
     @BeforeEach
