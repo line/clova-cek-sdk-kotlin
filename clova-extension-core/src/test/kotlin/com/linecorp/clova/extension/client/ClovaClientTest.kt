@@ -28,7 +28,7 @@ class ClovaClientTest {
 
     @Test
     fun testNotAssignObjectMapper() {
-        client = ClovaClient("test", MockVerifier())
+        client = ClovaClient("sdk.test", MockVerifier())
         assertThrows<NotImplementedError> { client.handleClovaRequest("{}", mapOf()) }
     }
 
@@ -37,7 +37,7 @@ class ClovaClientTest {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.Launch))
         
-        client = clovaClient("test", MockVerifier()) {
+        client = clovaClient("sdk.test", MockVerifier()) {
             objectMapper = mockMapper
             launchHandler { launchRequest, session ->
 
@@ -73,7 +73,7 @@ class ClovaClientTest {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.Intent))
 
-        client = clovaClient("test", MockVerifier()) {
+        client = clovaClient("sdk.test", MockVerifier()) {
             objectMapper = mockMapper
             intentHandler { intentRequest, session ->
                 assertTrue("session-id-3064" == session.sessionId)
@@ -108,7 +108,7 @@ class ClovaClientTest {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.SessionEnded))
 
-        client = clovaClient("test", MockVerifier()) {
+        client = clovaClient("sdk.test", MockVerifier()) {
             objectMapper = mockMapper
             sessionEndedHandler { sessionEndedRequest, session ->
                 assertTrue("session-id-3064" == session.sessionId)
@@ -143,7 +143,7 @@ class ClovaClientTest {
         `when`(mockMapper.deserialize("{}", CustomExtensionRequest::class.java)).thenReturn(
                 createMockCustomExtensionRequest(RequestType.EventRequest))
 
-        client = clovaClient("test", MockVerifier()) {
+        client = clovaClient("sdk.test", MockVerifier()) {
             objectMapper = mockMapper
             eventHandler { eventRequest, session ->
                 assertTrue("session-id-3064" == session.sessionId)
